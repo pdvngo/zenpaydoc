@@ -1,15 +1,9 @@
 ---
 title: API Reference
 
-language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - ruby
-  - python
-  - javascript
-
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
+  - <a href='https://account.zodaka.com/signup'>Sign Up Now</a>
+  - <a href='https://www.zodaka.com/'>Documentation Powered by Zodaka</a>
 
 includes:
   - errors
@@ -29,28 +23,10 @@ This example API documentation page was created with [Slate](https://github.com/
 
 > To authorize, use this code:
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
 ```shell
 # With shell, you can just pass the correct header with each request
 curl "api_endpoint_here"
   -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
 ```
 
 > Make sure to replace `meowmeowmeow` with your API key.
@@ -65,34 +41,126 @@ Kittn expects for the API key to be included in all API requests to the server i
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
 
+<!-- ---------------------------------------------------------------------------------------------------------------- -->
+<!-- ---------------------------------------------------------------------------------------------------------------- -->
+<!-- ---------------------------------------------------------------------------------------------------------------- -->
+
+# App Tokens
+
+<!-- ---------------------------------------------------------------------------------------------------------------- -->
+## Create App Token
+
+> JSON structured:
+
+```json
+{
+    "data": {
+        "token": "8c85c8a4-7b9d-38fb-bb8e-65d304a3efb9",
+        "application_id": "106388e0-04e2-11ea-9700-6d2a1ac9da4c",
+        "created_at": "2019-11-12T03:23:46.527Z"
+    }
+}
+```
+
+This endpoint create an application token.
+
+### HTTP Request
+
+`POST http://localhost:3000/api/applications/<ID>/tokens`
+
+### Headers
+
+Key           | Value                
+------------- | -------------------- 
+Authorization | Bearer *`{{token}}`*
+Content-Type  | application/json
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID        | The ID of the application to create
+
+<!-- ---------------------------------------------------------------------------------------------------------------- -->
+
+## Get App Token
+
+> JSON structured:
+
+```json
+{
+    "data": [
+        {
+            "token": "8c85c8a4-7b9d-38fb-bb8e-65d304a3efb9",
+            "application_id": "106388e0-04e2-11ea-9700-6d2a1ac9da4c",
+            "created_at": "2019-11-12T03:23:46.527Z"
+        }
+    ]
+}
+```
+
+This endpoint retrieves all tokens.
+
+### HTTP Request
+
+`GET http://localhost:3000/api/applications/<ID>/tokens`
+
+### Headers
+
+Key           | Value                | Description
+------------- | -------------------- | -------------------------------------------------------------------------------
+Authorization | Bearer **`token`**   | 
+Content-Type  | application/json     | 
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID        | The ID of the application to retrieve all tokens.
+
+<!-- ---------------------------------------------------------------------------------------------------------------- -->
+
+## Delete App Token
+
+> JSON structured:
+
+```json
+{
+    "id": "106388e0-04e2-11ea-9700-6d2a1ac9da4c",
+    "token": "8c85c8a4-7b9d-38fb-bb8e-65d304a3efb9"
+}
+```
+
+This endpoint deletes a specific token.
+
+### HTTP Request
+
+`DELETE http://localhost:3000/api/applications/<ID>/tokens/<TOKEN>`
+
+### Headers
+
+Key           | Value                
+------------- | -------------------- 
+Authorization | Bearer *`{{token}}`*
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+TOKEN     | The token to delete.
+ID        | The application ID of the token to delete.
+
+<!-- ---------------------------------------------------------------------------------------------------------------- -->
+<!-- ---------------------------------------------------------------------------------------------------------------- -->
+<!-- ---------------------------------------------------------------------------------------------------------------- -->
+
 # Kittens
 
 ## Get All Kittens
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
 ```shell
 curl "http://example.com/api/kittens"
   -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
 ```
 
 > The above command returns JSON structured like this:
@@ -135,32 +203,6 @@ Remember — a happy kitten is an authenticated kitten!
 
 ## Get a Specific Kitten
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
 > The above command returns JSON structured like this:
 
 ```json
@@ -189,31 +231,10 @@ ID | The ID of the kitten to retrieve
 
 ## Delete a Specific Kitten
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
 ```shell
 curl "http://example.com/api/kittens/2"
   -X DELETE
   -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
 ```
 
 > The above command returns JSON structured like this:
